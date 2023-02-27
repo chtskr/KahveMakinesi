@@ -1,10 +1,12 @@
 import java.util.Scanner;
 
+import static java.lang.Thread.sleep;
+
 public class KahveMakinesi {
 
     static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         // Kahve secim asamasi
 
@@ -17,6 +19,7 @@ public class KahveMakinesi {
         // Kullanicinin sectigi kahveye gore konsola bilgilendirme mesaji yazdirilir.
 
         System.out.println(kahveSecim + " hazirlaniyor");
+        Thread.sleep(2000);
 
         // Sut ekleme asamasi
 
@@ -51,11 +54,13 @@ public class KahveMakinesi {
 
     }
 
-    private static String boySecimiYap() {
-        System.out.println("*********\n\nHangi boyutta olsun? (buyuk boy-orta boy-kucuk boy)\n\n********");
+    private static String boySecimiYap() throws InterruptedException {
+        dekoratifYazdir();
+        System.out.println("Hangi boyutta olsun? (buyuk boy-orta boy-kucuk boy)");
         String boySecim = sc.nextLine();
         switch (boySecim.toLowerCase()) {
             case "buyuk boy", "orta boy", "kucuk boy" -> System.out.println("Kahveniz " + boySecim + " hazirlaniyor");
+
             default -> {
                 System.out.println("yanlış giriş yaptınız, lütfen doğru boy seçiniz");
                 boySecimiYap();
@@ -64,42 +69,51 @@ public class KahveMakinesi {
         return boySecim;
     }
 
-    private static void sekerEkle() {
-        System.out.println("*************\n\nseker eklememizi ister misiniz ? (Evet veya Hayır olarak cevaplayınız):\n\n*********");
+    private static void sekerEkle() throws InterruptedException {
+        dekoratifYazdir();
+        System.out.println("seker eklememizi ister misiniz ? (Evet veya Hayır olarak cevaplayınız):");
         String sekerSecim = sc.nextLine();
         if (sekerSecim.equalsIgnoreCase("evet")) {
             System.out.println("kaç seker eklememizi istersiniz? ");
+            Thread.sleep(2000);
+
             int sekerSayisi = sc.nextInt();
             sc.nextLine();//Dumy
             if (sekerSayisi > 0) {
                 System.out.println(sekerSayisi + " seker ekleniyor.");
+                Thread.sleep(2000);
             } else {
                 System.out.println("yanlıs girdi yaptınız, lütfen dogru giris yapınız.");
                 sekerEkle();
             }
         } else if (sekerSecim.equalsIgnoreCase("hayir")) {
             System.out.println("\nSeker eklenmiyor");
+            Thread.sleep(2000);
         } else {
             System.out.println("yanlıs girdi yaptınız, lütfen evet veya hayir olarak cevaplayınız.");
             sekerEkle();
         }
     }
 
-    private static void sutEkle() {
+    private static void sutEkle() throws InterruptedException {
+        dekoratifYazdir();
 
-        System.out.println("*************\n\nSüt eklememizi ister misiniz ? (Evet veya Hayır olarak cevaplayınız):\n\n*********");
+        System.out.println("Süt eklememizi ister misiniz ? (Evet veya Hayır olarak cevaplayınız):");
         String sutSecim = sc.nextLine();
 
         if (sutSecim.equalsIgnoreCase("evet")) {
             System.out.println("\nSut ekleniyor.");
+            Thread.sleep(2000);
         } else if (sutSecim.equalsIgnoreCase("hayir")) {
             System.out.println("\nSut eklenmiyor");
+            Thread.sleep(2000);
+
         } else {
             sutEkle();
         }
     }
 
-    private static String kahveSecimiYap() {
+    private static String kahveSecimiYap() throws InterruptedException {
 
         // Oyle bir method gelistir ki kullanici dogru secim yapana kadar methoddan cikamasin
 
@@ -115,25 +129,24 @@ public class KahveMakinesi {
                 return secim;
             } else {
                 System.out.println("Yanlis secim yaptiniz. Lutfen dogru bir giris yapiniz...");
+                Thread.sleep(2000);
+
                 menuyuYazdir();
             }
         }
     }
 
     private static void menuyuYazdir() {
-
-        System.out.println("*******************************************\n");
+        dekoratifYazdir();
         System.out.println("Hangi kahveyi istersiniz?");
         System.out.println("1. Turk Kahvesi");
         System.out.println("2. Filtre Kahve");
         System.out.println("3. Espresso");
-        System.out.println("\n*******************************************\n\n");
+        dekoratifYazdir();
     }
 
-    private static void dekoratifYazdir(String text) {
-        System.out.println("*******************************************\n");
-        System.out.println(text);
-        System.out.println("\n*******************************************\n\n");
+    private static void dekoratifYazdir() {
+        System.out.println("*******************************************");
 
 
     }
